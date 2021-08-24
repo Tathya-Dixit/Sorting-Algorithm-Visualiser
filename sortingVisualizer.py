@@ -147,6 +147,15 @@ def InsertionSort(arr,main,sspeed):
         time.sleep(sspeed)
     main(arr,["green" for x in range(len(data))])
 
+def MyInS(arr,main,sspeed):
+    l = len(arr)
+    for i in range(1,l):
+        for j in range(i,-1,-1):
+            if arr[j] < arr[j-1] and j!=0:
+                arr[j], arr[j-1] = arr[j-1], arr[j]
+                main(arr,["red" if x==j or x==j+1 else "white" for x in range(len(data))])
+                time.sleep(sspeed)
+    main(arr,["green" for x in range(len(data))])
 
 def start():
     global data
@@ -160,10 +169,11 @@ def start():
         InsertionSort(data,main,speed)
     elif algorithm == "Merge Sort":
         MainMS(data,main,speed)
-
+    elif algorithm == "My InS":
+        MyInS(data,main,speed)
 
 l1 = Label(f1,text="Algorithms : ", bg="#e6a64e").grid(row=0, column=0, sticky=W,pady=5, padx=5)
-algo = ttk.Combobox(f1, values=["Bubble Sort","Selection Sort","Insertion Sort","Merge Sort"])
+algo = ttk.Combobox(f1, values=["Bubble Sort","Selection Sort", "My InS","Insertion Sort","Merge Sort"])
 algo.grid(row=0, column=1,pady=5, padx=5)
 algo.current(0)
 bttn1 = Button(f1,text = "Generate", command=Generate)
